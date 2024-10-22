@@ -1,4 +1,6 @@
 import React from 'react';
+import SideBar from './components/side-bar';
+import Nav from './components/nav';
 import './globals.css';
 
 export default function RootLayout({
@@ -6,7 +8,12 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body className="flex">
+        <SideBar>
+          <Nav />
+        </SideBar>
+        {children}
+      </body>
     </html>
   );
 }
