@@ -23,11 +23,6 @@ const navItems: NavItem[] = [
     href: '/companies',
     icon: <CompaniesIcon className="mr-3.5" />,
   },
-  {
-    name: 'Test',
-    href: '/test_route',
-    icon: <CompaniesIcon className="mr-3.5" />,
-  },
 ];
 export default function Nav(): React.ReactElement {
   const path = usePathname();

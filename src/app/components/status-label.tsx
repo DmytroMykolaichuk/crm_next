@@ -13,7 +13,10 @@ export interface StatusLabelProps {
   status: Status;
 }
 
-export default function StatusLabel({ children, status }: StatusLabelProps) {
+export default function StatusLabel({
+  children,
+  status,
+}: StatusLabelProps): React.ReactElement {
   return (
     <div
       className={clsx(
@@ -22,7 +25,8 @@ export default function StatusLabel({ children, status }: StatusLabelProps) {
         status === Status.NotActive && 'bg-red-100 text-red-700',
         status === Status.Pending && 'bg-orange-100 text-orange-700',
         status === Status.Suspended && 'bg-blue-100 text-blue-700',
-      )}>
+      )}
+    >
       <div className="w-1 h-1 bg-current rounded-full mr-2"></div>
       {children}
     </div>

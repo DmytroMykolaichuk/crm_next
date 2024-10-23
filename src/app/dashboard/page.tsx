@@ -1,12 +1,12 @@
-import Link from 'next/link';
+import Header from '../components/header';
 
 export default function Dashboard(): React.ReactElement {
   return (
-    <>
-      <p>Dashboard</p>
-      <Link href="dashboard/standart" className="text-blue-700">
-        Standart
-      </Link>
-    </>
+    <div className="w-full">
+      <Header page="Dashbord" />
+      <main>
+        <h1>test</h1>
+      </main>
+    </div>
   );
 }
