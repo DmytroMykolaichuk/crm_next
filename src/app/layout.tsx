@@ -12,7 +12,7 @@ export default function RootLayout({
         <SideBar>
           <Nav />
         </SideBar>
-        {children}
+        <div className="w-full">{children}</div>
       </body>
     </html>
   );
