@@ -59,5 +59,6 @@ export async function getSales(): Promise<DataSales[]> {
 }
 
 export async function getStats(): Promise<DataStats[]> {
+  // await new Promise(resolve => setTimeout(resolve, 4000));
   return fetchData<DataStats[]>('summary-stats');
 }

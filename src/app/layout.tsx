@@ -12,7 +12,7 @@ export default function RootLayout({
         <SideBar>
           <Nav />
         </SideBar>
-        <div className="w-full">{children}</div>
+        <div className="w-full ml-[16.666%]">{children}</div>
       </body>
     </html>
   );

@@ -8,7 +8,7 @@ export default function SideBar({
   children,
 }: ChildrenType): React.ReactElement {
   return (
-    <div className="h-screen pt-[32px] bg-gray-900 w-1/6 flex flex-col items-center">
+    <div className="fixed h-screen pt-[32px] bg-gray-900 w-1/6 flex flex-col items-center">
       <Image
         src="/images/logo.png"
         alt="logo"

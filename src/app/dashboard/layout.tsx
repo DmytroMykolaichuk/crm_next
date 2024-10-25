@@ -20,10 +20,12 @@ export default function DashboardLayout({
   return (
     <>
       {children}
-      <main className="pt-10 pl-10 pr-7">
+      <main className="pt-10 pl-10 pr-7 ">
         {stats}
-        {sales}
-        {categories}
+        <div className="flex gap-5">
+          {sales}
+          {categories}
+        </div>
         {promotions}
         {countries}
       </main>
