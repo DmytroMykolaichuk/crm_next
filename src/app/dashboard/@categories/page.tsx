@@ -5,7 +5,7 @@ export default async function Categories(): Promise<React.ReactNode> {
   const data = await getCategories();
 
   return (
-    <section className="bg-gray-100 rounded	p-5 w-3/5 h-fit">
+    <section className="bg-gray-200 rounded	p-5 w-3/5 h-fit">
       <h2 className=" pl-5 pb-5 font-medium text-xl text-gray-900">
         Categories of companies
       </h2>

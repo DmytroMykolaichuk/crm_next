@@ -5,7 +5,7 @@ import Image from 'next/image';
 export default async function Countries(): Promise<React.ReactNode> {
   const data = await getCountries();
   return (
-    <section className="bg-gray-100 rounded	px-5 py-5 w-[50%] ">
+    <section className="bg-gray-200 rounded	px-5 py-5 w-[50%] h-fit">
       <h2 className="pb-5 font-medium text-xl text-gray-900">
         Countries of companies
       </h2>
