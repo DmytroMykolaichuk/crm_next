@@ -20,14 +20,16 @@ export default function DashboardLayout({
   return (
     <>
       {children}
-      <main className="pt-10 pl-10 pr-7 ">
+      <main className="py-10 pl-10 pr-7 ">
         {stats}
         <div className="flex gap-5">
           {sales}
           {categories}
         </div>
-        {countries}
-        {promotions}
+        <div className="flex gap-5 mt-5">
+          {countries}
+          {promotions}
+        </div>
       </main>
     </>
   );
