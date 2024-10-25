@@ -4,9 +4,8 @@ import { getSales } from '@/app/utils/API';
 
 export default async function Sales(): Promise<React.ReactNode> {
   const data = await getSales();
-  console.log(data);
   return (
-    <section className="bg-gray-100 rounded	pt-5 w-2/5">
+    <section className="bg-gray-100 rounded	pt-5 w-[38%]">
       <h2 className=" pl-5 pb-5 font-medium text-xl text-gray-900">
         Sales details
       </h2>

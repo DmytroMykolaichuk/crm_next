@@ -26,8 +26,8 @@ export default function DashboardLayout({
           {sales}
           {categories}
         </div>
-        {promotions}
         {countries}
+        {promotions}
       </main>
     </>
   );
