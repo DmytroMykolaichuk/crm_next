@@ -13,7 +13,7 @@ export default async function Countries(): Promise<React.ReactNode> {
         <ul className="flex flex-col gap-y-1.5">
           {data.map(({ title, id }) => (
             <li key={id}>
-              <span className="flex items-center gap-x-1.5 font-medium text-sm text-gray-900 before:w-2 before:h-2 before:bg-purple-200 before:rounded-full">
+              <span className="flex items-center gap-x-1.5 font-medium text-sm text-gray-900 before:w-2 before:h-2 before:bg-purple-300 before:rounded-full">
                 {title} - {Math.floor(Math.random() * 9) + 1}
               </span>
             </li>

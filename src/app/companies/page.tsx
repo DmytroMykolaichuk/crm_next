@@ -1,18 +1,20 @@
+import { getCompanies } from '../utils/API';
 import Header from '../components/header';
-import Link from 'next/link';
+import HeaderCompaniesPage from '../components/header-companies-page';
+import TableCompanies from '../components/table-companies';
 
-export default function Companies(): React.ReactElement {
+export default async function Companies(): Promise<React.ReactElement> {
+  const data = await getCompanies();
+
   return (
-    <div className="w-full">
+    <>
       <Header page="Companies" />
       <main>
-        <div>
-          <Link href="companies/mono">Mono</Link>
-        </div>
-        <div>
-          <Link href="companies/nova_poshta">Nova Poshta</Link>
-        </div>
+        <section>
+          <HeaderCompaniesPage />
+          <TableCompanies data={data} />
+        </section>
       </main>
-    </div>
+    </>
   );
 }

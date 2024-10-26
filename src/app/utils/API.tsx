@@ -26,6 +26,19 @@ interface DataStats {
   id: string;
 }
 
+export interface Company {
+  title: string;
+  description: string;
+  status: string;
+  joinedDate: string;
+  hasPromotions: boolean;
+  categoryId: string;
+  categoryTitle: string;
+  countryId: string;
+  countryTitle: string;
+  id: string;
+}
+
 async function fetchData<T>(url: string): Promise<T> {
   try {
     const res = await fetch(
@@ -61,4 +74,12 @@ export async function getSales(): Promise<DataSales[]> {
 export async function getStats(): Promise<DataStats[]> {
   // await new Promise(resolve => setTimeout(resolve, 4000));
   return fetchData<DataStats[]>('summary-stats');
+}
+
+export async function getCompanies(): Promise<Company[]> {
+  return fetchData<Company[]>('companies');
+}
+
+export async function getOneCompany(id: string): Promise<Company> {
+  return fetchData<Company>(`companies/${id}`);
 }
