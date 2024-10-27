@@ -3,7 +3,7 @@ interface DataCountriesAndCategories {
   id: string;
 }
 
-interface DataPromotions extends DataCountriesAndCategories {
+export interface DataPromotions extends DataCountriesAndCategories {
   description: string;
   discount: number;
   companyId: string;
@@ -45,6 +45,9 @@ async function fetchData<T>(url: string): Promise<T> {
       `https://65c21c4ff7e6ea59682aa7e1.mockapi.io/api/v1/${url}`,
     );
     if (!res.ok) {
+      if (res.status === 404) {
+        return [] as T;
+      }
       throw new Error(`Error fetching ${url}: ${res.statusText}`);
     }
     const result = await res.json();
@@ -82,4 +85,9 @@ export async function getCompanies(): Promise<Company[]> {
 
 export async function getOneCompany(id: string): Promise<Company> {
   return fetchData<Company>(`companies/${id}`);
+}
+export async function getPromotionsOneCompany(
+  id: string,
+): Promise<DataPromotions[]> {
+  return fetchData<DataPromotions[]>(`promotions?companyId=${id}`);
 }
