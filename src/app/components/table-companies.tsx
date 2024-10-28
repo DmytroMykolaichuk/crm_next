@@ -1,17 +1,32 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
+import { getCompanies } from '../utils/API';
 import StatusLabel from './status-label';
 import HasPromotions from './has-promotions';
 import LinkRow from './link-row';
 import { Company } from '../utils/API';
 
 interface TableCompaniesProps {
-  data: Company[];
+  searchTerm: string;
 }
 
 export default function TableCompanies({
-  data,
+  searchTerm,
 }: TableCompaniesProps): React.ReactElement {
+  const [data, setData] = useState<Company[]>([]);
+
+  useEffect(() => {
+    const fetchCompanies = async () => {
+      const result = await getCompanies();
+      setData(result);
+    };
+    fetchCompanies();
+  }, []);
+
+  const filteredData = data.filter(company =>
+    company.title.toLowerCase().includes(searchTerm.toLowerCase()),
+  );
+
   const colorCategory: { [key: string]: string } = {
     '1': '#FB923C',
     '2': '#60A5FA',
@@ -40,7 +55,7 @@ export default function TableCompanies({
           </tr>
         </thead>
         <tbody>
-          {data.map(
+          {filteredData.map(
             ({
               id,
               title,

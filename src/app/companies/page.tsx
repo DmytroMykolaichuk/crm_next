@@ -1,18 +1,18 @@
-import { getCompanies } from '../utils/API';
+'use client';
+import { useState } from 'react';
 import Header from '../components/header';
-import HeaderCompaniesPage from '../components/header-companies-page';
+import ToolBar from '../components/tool-bar';
 import TableCompanies from '../components/table-companies';
 
-export default async function Companies(): Promise<React.ReactElement> {
-  const data = await getCompanies();
-
+export default function Companies(): React.ReactElement {
+  const [searchTerm, setSearchTerm] = useState('');
   return (
     <>
       <Header page="Companies" />
       <main>
         <section>
-          <HeaderCompaniesPage />
-          <TableCompanies data={data} />
+          <ToolBar onSearch={setSearchTerm} type={'company'} />
+          <TableCompanies searchTerm={searchTerm} />
         </section>
       </main>
     </>

@@ -1,9 +1,11 @@
+'use client';
 import { getOneCompany, getPromotionsOneCompany } from '@/app/utils/API';
 import Image from 'next/image';
 import Header from '../../components/header';
-import React from 'react';
-import HeaderCompaniesPage from '@/app/components/header-companies-page';
+import React, { useState, useEffect } from 'react';
+import ToolBar from '@/app/components/tool-bar';
 import StatusLabel from '@/app/components/status-label';
+import { Company, DataPromotions } from '@/app/utils/API';
 
 interface CompanyProps {
   params: {
@@ -11,22 +13,48 @@ interface CompanyProps {
   };
 }
 
-export default async function Company({
-  params,
-}: CompanyProps): Promise<React.ReactNode> {
-  const data = await getOneCompany(params.id);
+async function fetchPromotions(hasPromotions: boolean, id: string) {
+  return hasPromotions ? await getPromotionsOneCompany(id) : [];
+}
 
-  async function checkPromo(hasPromotions: boolean, id: string) {
-    return hasPromotions ? await getPromotionsOneCompany(id) : [];
-  }
+export default function CompanyPage({ params }: CompanyProps): React.ReactNode {
+  const [searchTerm, setSearchTerm] = useState('');
+  const [data, setData] = useState<Company>({
+    title: 'Loading',
+    description: 'Loading',
+    status: 'Loading',
+    joinedDate: 'Loading',
+    hasPromotions: false,
+    categoryId: 'Loading',
+    categoryTitle: 'Loading',
+    countryId: '',
+    countryTitle: 'Loading',
+    id: '',
+  });
+  const [promotions, setPromotions] = useState<DataPromotions[]>([]);
 
-  const promo = await checkPromo(data.hasPromotions, data.id);
+  useEffect(() => {
+    const loadData = async () => {
+      const companyData = await getOneCompany(params.id);
+      const promoData = await fetchPromotions(
+        companyData.hasPromotions,
+        companyData.id,
+      );
+      setData(companyData);
+      setPromotions(promoData);
+    };
 
+    loadData();
+  }, [params.id]);
+
+  const filteredPromo = promotions.filter(promo =>
+    promo.title.toLowerCase().includes(searchTerm.toLowerCase()),
+  );
   return (
     <div className="w-full">
       <Header page={data.title} />
       <main>
-        <HeaderCompaniesPage />
+        <ToolBar onSearch={setSearchTerm} type={'promotion'} />
         <div className="flex pl-10 pr-7 pb-10 gap-x-5">
           <div className="flex flex-col ">
             <div className="flex flex-col justify-center items-center gap-5 py-7 bg-gray-900 rounded w-[268px]">
@@ -53,14 +81,14 @@ export default async function Company({
           </div>
           <div className="w-full">
             <ul className="grid grid-cols-3 gap-5">
-              {promo?.map(({ title, description, discount, id }) => (
+              {filteredPromo?.map(({ title, description, discount, id }) => (
                 <li key={id} className="rounded  bg-gray-200 overflow-hidden">
                   <div
                     className="w-full h-[160px] bg-[#D9D9D9] relative bg-cover"
                     style={{ backgroundImage: "url('/images/World.svg')" }}
                   >
                     <div className=" absolute top-o left-0 w-[52px] h-[52px] bg-[#111827]  rounded-br-full text-[#D9F99D] text-xs font-bold text-center pt-3">
-                      -{discount}%
+                      - {discount}%
                     </div>
                   </div>
                   <div className="py-5 pl-5 pr-2 min-h-[116px]">

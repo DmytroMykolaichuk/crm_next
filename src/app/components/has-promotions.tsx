@@ -6,7 +6,7 @@ interface PropHasPromotions {
 
 export default function HasPromotions({
   hasPromotions,
-}: PropHasPromotions): React.ReactElement {
+}: PropHasPromotions): React.ReactNode {
   const iconSrc = hasPromotions ? '/icon/check.svg' : '/icon/x-mark.svg';
   const text = hasPromotions ? 'Yes' : 'No';
   const textColor = hasPromotions ? 'text-green-700' : 'text-red-700';
