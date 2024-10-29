@@ -2,14 +2,8 @@
 
 import React, { useState } from 'react';
 import Image from 'next/image';
-import clsx from 'clsx';
 
-export interface LogoUploaderProps
-  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'type'> {
-  square?: boolean;
-}
-
-export default function LogoUploader({ square, ...rest }: LogoUploaderProps) {
+export default function LogoUploader(): React.ReactNode {
   const [uploadedImage, setUploadedImage] = useState<string | null>(null);
 
   const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -26,7 +20,7 @@ export default function LogoUploader({ square, ...rest }: LogoUploaderProps) {
       id="logo-company"
     >
       <p className="absolute top-0 left-0 text-base color-gray-900">Logo</p>
-      <label className="flex flex-col justify-center items-center h-40 bg-white border border-slate-900 border-dashed cursor-pointer w-40 rounded-full">
+      <label className="flex flex-col justify-center items-center h-full bg-white border border-slate-900 border-dashed cursor-pointer w-48 rounded-full">
         {uploadedImage ? (
           <img
             src={uploadedImage}
@@ -47,7 +41,6 @@ export default function LogoUploader({ square, ...rest }: LogoUploaderProps) {
           </>
         )}
         <input
-          {...rest}
           type="file"
           accept="image/*"
           onChange={handleImageUpload}
