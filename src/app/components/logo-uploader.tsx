@@ -55,6 +55,7 @@ export default function LogoUploader({
           accept="image/*"
           onChange={handleImageUpload}
           className="hidden"
+          name="avatar"
         />
       </label>
     </div>

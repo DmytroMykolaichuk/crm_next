@@ -6,22 +6,22 @@ export default async function Stats(): Promise<React.ReactNode> {
   const stats = [
     {
       title: 'Total promotions',
-      value: data[0].promotions,
+      value: data.promotions,
       gradient: '/images/gradient/mesh-gradient-1.svg',
     },
     {
       title: 'Total category',
-      value: data[0].categories,
+      value: data.categories,
       gradient: '/images/gradient/mesh-gradient-2.svg',
     },
     {
       title: 'New companies',
-      value: data[0].newCompanies,
+      value: data.newCompanies,
       gradient: '/images/gradient/mesh-gradient-3.svg',
     },
     {
       title: 'Total active companies',
-      value: data[0].activeCompanies,
+      value: data.activeCompanies,
       gradient: '/images/gradient/mesh-gradient-4.svg',
     },
   ];

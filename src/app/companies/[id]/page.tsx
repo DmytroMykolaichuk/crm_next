@@ -1,5 +1,9 @@
 'use client';
-import { getOneCompany, getPromotionsOneCompany } from '@/app/utils/API';
+import {
+  deletePromo,
+  getOneCompany,
+  getPromotionsOneCompany,
+} from '@/app/utils/API';
 import Image from 'next/image';
 import Header from '../../components/header';
 import React, { useState, useEffect } from 'react';
@@ -11,10 +15,6 @@ interface CompanyProps {
   params: {
     id: string;
   };
-}
-
-async function fetchPromotions(hasPromotions: boolean, id: string) {
-  return hasPromotions ? await getPromotionsOneCompany(id) : [];
 }
 
 export default function CompanyPage({ params }: CompanyProps): React.ReactNode {
@@ -36,16 +36,18 @@ export default function CompanyPage({ params }: CompanyProps): React.ReactNode {
   useEffect(() => {
     const loadData = async () => {
       const companyData = await getOneCompany(params.id);
-      const promoData = await fetchPromotions(
-        companyData.hasPromotions,
-        companyData.id,
-      );
+      const promoData = await getPromotionsOneCompany(companyData.id);
       setData(companyData);
       setPromotions(promoData);
     };
 
     loadData();
   }, [params.id]);
+
+  async function handleDelete(id: string) {
+    await deletePromo(id);
+    setPromotions(prev => prev.filter(el => el.id != id));
+  }
 
   const filteredPromo = promotions.filter(promo =>
     promo.title.toLowerCase().includes(searchTerm.toLowerCase()),
@@ -94,6 +96,13 @@ export default function CompanyPage({ params }: CompanyProps): React.ReactNode {
                     <div className=" absolute top-o left-0 w-[52px] h-[52px] bg-[#111827]  rounded-br-full text-[#D9F99D] text-xs font-bold text-center pt-3">
                       - {discount}%
                     </div>
+                    <button
+                      type="button"
+                      className=" absolute top-o right-0 w-[52px] h-[52px] bg-[#111827]  rounded-bl-full text-[#D9F99D] text-xs font-bold text-center pl-3 pb-4"
+                      onClick={() => handleDelete(id as string)}
+                    >
+                      X
+                    </button>
                   </div>
                   <div className="py-5 pl-5 pr-2 min-h-[116px]">
                     <h3 className="font-semibold text-base text-gray-900 mb-3">

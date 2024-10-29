@@ -1,8 +1,64 @@
-import React from 'react';
+'use client';
+import React, { FormEvent } from 'react';
 import LogoUploader from './logo-uploader';
+import { useRouter } from 'next/navigation';
+
+const countries = ['', 'Canada', 'USA', 'Italy', 'Ukraine', 'Spain'];
+
 export default function FormNewCompany(): React.ReactNode {
+  const router = useRouter();
+
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const { avatar, name, category, status, date, country, description } = e
+      .currentTarget.elements as typeof e.currentTarget.elements & {
+      avatar: { value: string };
+      name: { value: string };
+      category: { value: string };
+      status: { value: string };
+      date: { value: string };
+      country: { value: string };
+      description: { value: string };
+    };
+
+    const companyData = {
+      title: name.value,
+      description: description.value,
+      status: status.value,
+      joinedDate: date.value,
+      categoryId: category.value,
+      categoryTitle: 'Category ' + category.value,
+      countryId: country.value,
+      countryTitle: countries[parseInt(country.value) - 1] || '',
+      avatar: avatar.value,
+      hasPromotions: false,
+    };
+
+    try {
+      const response = await fetch(
+        'https://65c21c4ff7e6ea59682aa7e1.mockapi.io/api/v1/companies',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(companyData),
+        },
+      );
+
+      if (!response.ok) {
+        throw new Error('Error creating company');
+      }
+
+      const result = await response.json();
+      router.push(`/companies/${result.id}`);
+    } catch (error) {
+      console.error('Error submitting form:', error);
+    }
+  }
+
   return (
-    <form>
+    <form onSubmit={handleSubmit}>
       <h1 className="font-semibold text-xl mb-[42px]">Add new company</h1>
       <div className="grid grid-cols-2 grid-rows-4 gap-x-7 gap-y-5 mb-10 text-base">
         <LogoUploader />
@@ -10,16 +66,19 @@ export default function FormNewCompany(): React.ReactNode {
           Name
           <input
             type="text"
-            className="py-3 px-3 rounded border shadow"
+            className="py-3 px-3 rounded border shadow min-w-[248px]"
             placeholder="Title"
             required
             autoFocus
+            name="name"
           />
         </label>
         <label className="grid grid-cols-1 gap-y-2">
           Category
-          {/* <input type="text" className="py-3 px-3" placeholder="Title" /> */}
-          <select name="category" className="rounded py-3 px-3 border shadow">
+          <select
+            name="category"
+            className="rounded py-3 px-3 border shadow min-w-[248px]"
+          >
             <option value="1">Category 1</option>
             <option value="2">Category 2</option>
             <option value="3">Category 3</option>
@@ -32,15 +91,9 @@ export default function FormNewCompany(): React.ReactNode {
         </label>
         <label className="grid grid-cols-1 gap-y-2">
           Status
-          {/* <input
-            type="text"
-            className="py-3 px-3"
-            placeholder="Title"
-            required
-          /> */}
           <select
-            name="category"
-            className="rounded py-3 px-3 border shadow w-[308px]"
+            name="status"
+            className="rounded py-3 px-3 border shadow min-w-[248px]"
             required
           >
             <option value="active">Active</option>
@@ -52,24 +105,37 @@ export default function FormNewCompany(): React.ReactNode {
         <label className="grid grid-cols-1 gap-y-2">
           Joined data
           <input
+            name="date"
             type="date"
-            className="rounded  border shadow py-3 px-3"
+            className="rounded  border shadow py-3 px-3 min-w-[248px]"
             placeholder="14.02.2021"
           />
         </label>
         <label className="grid grid-cols-1 gap-y-2">
           Country
-          <input
+          {/* <input
+            name="country"
             type="text"
             className="rounded border shadow py-3 px-3"
             placeholder="Description"
-          />
+          /> */}
+          <select
+            name="country"
+            className="rounded py-3 px-3 border shadow min-w-[248px]"
+          >
+            <option value="1">Canada</option>
+            <option value="2">USA</option>
+            <option value="3">Italia</option>
+            <option value="4">Ukraine</option>
+            <option value="5">Spain</option>
+          </select>
         </label>
         <label className="grid grid-cols-1 gap-y-2">
           Description
           <input
+            name="description"
             type="text"
-            className="rounded border shadow py-3 px-3"
+            className="rounded border shadow py-3 px-3 min-w-[248px]"
             placeholder="Description"
           />
         </label>

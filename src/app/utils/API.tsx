@@ -3,11 +3,14 @@ interface DataCountriesAndCategories {
   id: string;
 }
 
-export interface DataPromotions extends DataCountriesAndCategories {
+export interface DataPromotions {
   description: string;
   discount: number;
   companyId: string;
   companyTitle: string;
+  avatar?: string;
+  title: string;
+  id?: string;
 }
 
 interface DataSales {
@@ -74,9 +77,9 @@ export async function getSales(): Promise<DataSales[]> {
   return fetchData<DataSales[]>('summary-sales');
 }
 
-export async function getStats(): Promise<DataStats[]> {
+export async function getStats(): Promise<DataStats> {
   // await new Promise(resolve => setTimeout(resolve, 4000));
-  return fetchData<DataStats[]>('summary-stats');
+  return fetchData<DataStats>('summary-stats/1');
 }
 
 export async function getCompanies(): Promise<Company[]> {
@@ -86,8 +89,70 @@ export async function getCompanies(): Promise<Company[]> {
 export async function getOneCompany(id: string): Promise<Company> {
   return fetchData<Company>(`companies/${id}`);
 }
+
 export async function getPromotionsOneCompany(
   id: string,
 ): Promise<DataPromotions[]> {
   return fetchData<DataPromotions[]>(`promotions?companyId=${id}`);
+}
+
+export async function createPromo(promoData: Omit<DataPromotions, 'id'>) {
+  try {
+    const response = await fetch(
+      `https://65c21c4ff7e6ea59682aa7e1.mockapi.io/api/v1/promotions`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(promoData),
+      },
+    );
+
+    if (!response.ok) {
+      throw new Error('Error creating promo');
+    }
+  } catch (error) {
+    console.error('Error creting promo:', error);
+  }
+}
+
+export async function changeCompany(companyData: Company) {
+  try {
+    const response = await fetch(
+      `https://65c21c4ff7e6ea59682aa7e1.mockapi.io/api/v1/companies/${companyData.id}`,
+      {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ ...companyData, hasPromotions: true }),
+      },
+    );
+
+    if (!response.ok) {
+      throw new Error('Error change company');
+    }
+  } catch (error) {
+    console.error('Error chenging company:', error);
+  }
+}
+
+export async function deletePromo(id: string) {
+  try {
+    const response = await fetch(
+      `https://65c21c4ff7e6ea59682aa7e1.mockapi.io/api/v1/promotions/${id}`,
+      {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      },
+    );
+    if (!response.ok) {
+      throw new Error('Error change company');
+    }
+  } catch (error) {
+    console.error('Error deleting promotion:', error);
+  }
 }
