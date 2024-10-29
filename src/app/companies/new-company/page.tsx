@@ -3,7 +3,7 @@ import React from 'react';
 
 export default function NewCompany(): React.ReactNode {
   return (
-    <div className="p-10 py-20">
+    <div className="px-20 py-10">
       <FormNewCompany />
     </div>
   );

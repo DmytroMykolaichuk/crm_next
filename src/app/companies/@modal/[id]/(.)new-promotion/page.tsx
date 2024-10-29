@@ -1,10 +1,11 @@
 import FormNewPromo from '@/app/components/form-new-promo';
+import Modal from '@/app/components/modal';
 import React from 'react';
 
-export default function NewPromotion(): React.ReactNode {
+export default function Page() {
   return (
-    <div className="py-10 px-80">
+    <Modal>
       <FormNewPromo />
-    </div>
+    </Modal>
   );
 }

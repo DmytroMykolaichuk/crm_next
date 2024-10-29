@@ -2,8 +2,14 @@
 
 import React, { useState } from 'react';
 import Image from 'next/image';
+import clsx from 'clsx';
+export interface LogoUploaderProps {
+  type?: string;
+}
 
-export default function LogoUploader(): React.ReactNode {
+export default function LogoUploader({
+  type,
+}: LogoUploaderProps): React.ReactNode {
   const [uploadedImage, setUploadedImage] = useState<string | null>(null);
 
   const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -15,17 +21,21 @@ export default function LogoUploader(): React.ReactNode {
   };
 
   return (
-    <div
-      className="flex justify-center items-center row-span-2 relative"
-      id="logo-company"
-    >
-      <p className="absolute top-0 left-0 text-base color-gray-900">Logo</p>
-      <label className="flex flex-col justify-center items-center h-full bg-white border border-slate-900 border-dashed cursor-pointer w-48 rounded-full">
+    <div className="flex justify-center items-center row-span-2 relative">
+      {!type && (
+        <p className="absolute top-0 left-0 text-base color-gray-900">Logo</p>
+      )}
+      <label
+        className={clsx(
+          'flex flex-col items-center justify-center  bg-white border border-slate-900 border-dashed cursor-pointer',
+          type ? 'w-full h-[184px] rounded' : 'w-48 h-full rounded-full',
+        )}
+      >
         {uploadedImage ? (
           <img
             src={uploadedImage}
             alt="Uploaded logo"
-            className="object-cover rounded-full"
+            className={clsx('object-cover', !type && 'rounded-full')}
             style={{ width: '100%', height: '100%' }}
           />
         ) : (
