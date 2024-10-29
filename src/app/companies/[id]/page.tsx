@@ -36,6 +36,7 @@ export default function CompanyPage({ params }: CompanyProps): React.ReactNode {
   useEffect(() => {
     const loadData = async () => {
       const companyData = await getOneCompany(params.id);
+      console.log(companyData);
       const promoData = await fetchPromotions(
         companyData.hasPromotions,
         companyData.id,
@@ -45,7 +46,7 @@ export default function CompanyPage({ params }: CompanyProps): React.ReactNode {
     };
 
     loadData();
-  }, [params.id]);
+  }, [params.id, data]);
 
   const filteredPromo = promotions.filter(promo =>
     promo.title.toLowerCase().includes(searchTerm.toLowerCase()),
@@ -54,7 +55,11 @@ export default function CompanyPage({ params }: CompanyProps): React.ReactNode {
     <div className="w-full">
       <Header page={data.title} />
       <main>
-        <ToolBar onSearch={setSearchTerm} type={'promotion'} />
+        <ToolBar
+          onSearch={setSearchTerm}
+          type={'promotion'}
+          url={`/companies/${params.id}/new-promotion`}
+        />
         <div className="flex pl-10 pr-7 pb-10 gap-x-5">
           <div className="flex flex-col ">
             <div className="flex flex-col justify-center items-center gap-5 py-7 bg-gray-900 rounded w-[268px]">

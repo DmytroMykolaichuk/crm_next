@@ -6,14 +6,15 @@ import Link from 'next/link';
 interface ToolBarProps {
   onSearch: (searchTerm: string) => void;
   type: 'promotion' | 'company';
+  url: string;
 }
 
 export default function ToolBar({
   onSearch,
   type,
+  url,
 }: ToolBarProps): React.ReactNode {
   const [searchTerm, setSearchTerm] = useState('');
-
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
     setSearchTerm(value);
@@ -37,7 +38,7 @@ export default function ToolBar({
           className="absolute right-3 top-1/2 transform -translate-y-1/2 "
         />
       </div>
-      <Link href="#" className="py-2.5 px-5 bg-gray-900 rounded text-white">
+      <Link href={url} className="py-2.5 px-5 bg-gray-900 rounded text-white">
         Add {type}
       </Link>
     </div>

@@ -11,7 +11,11 @@ export default function Companies(): React.ReactElement {
       <Header page="Companies" />
       <main>
         <section>
-          <ToolBar onSearch={setSearchTerm} type={'company'} />
+          <ToolBar
+            onSearch={setSearchTerm}
+            type={'company'}
+            url={'/companies/new-company'}
+          />
           <TableCompanies searchTerm={searchTerm} />
         </section>
       </main>
