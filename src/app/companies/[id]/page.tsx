@@ -36,7 +36,6 @@ export default function CompanyPage({ params }: CompanyProps): React.ReactNode {
   useEffect(() => {
     const loadData = async () => {
       const companyData = await getOneCompany(params.id);
-      console.log(companyData);
       const promoData = await fetchPromotions(
         companyData.hasPromotions,
         companyData.id,
@@ -46,7 +45,7 @@ export default function CompanyPage({ params }: CompanyProps): React.ReactNode {
     };
 
     loadData();
-  }, [params.id, data]);
+  }, [params.id]);
 
   const filteredPromo = promotions.filter(promo =>
     promo.title.toLowerCase().includes(searchTerm.toLowerCase()),
