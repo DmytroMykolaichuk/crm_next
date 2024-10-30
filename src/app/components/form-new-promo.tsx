@@ -68,7 +68,6 @@ export default function FormNewPromo({
             className="py-3 px-3 rounded border shadow min-w-[308px]"
             placeholder="Description"
             required
-            autoFocus
           />
         </label>
         <label className="flex flex-col gap-2">
@@ -79,7 +78,6 @@ export default function FormNewPromo({
             className="py-3 px-3 rounded border shadow min-w-[308px]"
             placeholder="40"
             required
-            autoFocus
           />
         </label>
         <LogoUploader type="Image" />
