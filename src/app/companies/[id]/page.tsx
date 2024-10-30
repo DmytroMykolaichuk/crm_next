@@ -6,10 +6,10 @@ import {
   getPromotionsOneCompany,
 } from '@/app/utils/API';
 import Image from 'next/image';
-import Header from '../../components/Header';
+import Header from '../../components/header';
 import React, { useState, useEffect } from 'react';
-import ToolBar from '@/app/components/Tool-bar';
-import StatusLabel from '@/app/components/Status-label';
+import ToolBar from '@/app/components/tool-bar';
+import StatusLabel from '@/app/components/status-label';
 import { DataCompany, DataPromotions } from '@/app/utils/API';
 
 interface CompanyProps {

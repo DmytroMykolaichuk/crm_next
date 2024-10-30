@@ -1,6 +1,6 @@
 'use client';
 import React, { FormEvent } from 'react';
-import LogoUploader from './Logo-uploader';
+import LogoUploader from './logo-uploader';
 import { createCompany } from '../utils/API';
 import { useRouter } from 'next/navigation';
 

@@ -1,6 +1,6 @@
 import React from 'react';
-import Modal from '@/app/components/Modal';
-import FormNewCompany from '@/app/components/Forma-new-company';
+import Modal from '@/app/components/modal';
+import FormNewCompany from '@/app/components/forma-new-company';
 
 export default function NewCompany(): React.ReactNode {
   return (

@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { getCompanies } from '../utils/API';
-import StatusLabel from './Status-label';
-import HasPromotions from './Has-promotions';
-import LinkRow from './Link-row';
+import StatusLabel from './status-label';
+import HasPromotions from './has-promotions';
+import LinkRow from './link-row';
 import { DataCompany } from '../utils/API';
 
 interface TableCompaniesProps {

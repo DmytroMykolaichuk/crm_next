@@ -52,7 +52,7 @@ export interface DataCompany {
   avatar?: string;
 }
 
-const PROJECT_TOKEN = process.env.NEXT_PUBLIC_TOKEN;
+// const PROJECT_TOKEN = process.env.NEXT_PUBLIC_TOKEN;
 
 async function fetchData<T>(url: string): Promise<T> {
   try {
