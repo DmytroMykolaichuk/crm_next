@@ -10,16 +10,16 @@ export default async function Categories(): Promise<React.ReactNode> {
         Categories of companies
       </h2>
       <ul className="grid grid-cols-4 gap-3	">
-        {data.map(({ title, id }) => (
+        {data.map(({ categoryTitle, id, count }) => (
           <li
             key={id}
             className="bg-gray-900 px-3 pt-3 rounded odd:text-purple-200 even:text-lime-200"
           >
             <span className="flex flex-col gap-2 text-white before:w-4 before:h-0.5 before:bg-white">
-              {title}
+              {categoryTitle}
             </span>
             <span className="block font-semibold text-6xl  text-end">
-              {Math.floor(Math.random() * 99) + 1}
+              {count}
             </span>
           </li>
         ))}

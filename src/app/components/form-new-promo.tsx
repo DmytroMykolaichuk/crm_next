@@ -39,7 +39,7 @@ export default function FormNewPromo({
       await createPromo(promoData);
       const company = await getOneCompany(id);
       await changeCompany(company);
-      router.back();
+      router.push(`/companies/${id}?reload=true`);
     } catch (error) {
       console.error('Error submitting form:', error);
     }

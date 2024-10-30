@@ -1,5 +1,14 @@
-interface DataCountriesAndCategories {
-  title: string;
+interface DataCategories {
+  categoryTitle: string;
+  categoryid: string;
+  count: number;
+  id: string;
+}
+
+interface DataCountries {
+  countryId: string;
+  countryTitle: string;
+  count: number;
   id: string;
 }
 
@@ -40,12 +49,15 @@ export interface Company {
   countryId: string;
   countryTitle: string;
   id: string;
+  avatar?: string;
 }
+
+const PROJECT_TOKEN = process.env.NEXT_PUBLIC_TOKEN;
 
 async function fetchData<T>(url: string): Promise<T> {
   try {
     const res = await fetch(
-      `https://65c21c4ff7e6ea59682aa7e1.mockapi.io/api/v1/${url}`,
+      `https://${PROJECT_TOKEN}.mockapi.io/api/v1/${url}`,
     );
     if (!res.ok) {
       if (res.status === 404) {
@@ -61,12 +73,14 @@ async function fetchData<T>(url: string): Promise<T> {
   }
 }
 
-export async function getCountries(): Promise<DataCountriesAndCategories[]> {
-  return fetchData<DataCountriesAndCategories[]>('countries');
+export async function getCountries(): Promise<DataCountries[]> {
+  return fetchData<DataCountries[]>('summary-countries');
+  // return fetchData<DataCountries[]>('countries');
 }
 
-export async function getCategories(): Promise<DataCountriesAndCategories[]> {
-  return fetchData<DataCountriesAndCategories[]>('categories');
+export async function getCategories(): Promise<DataCategories[]> {
+  return fetchData<DataCategories[]>('summary-categories');
+  // return fetchData<DataCategories[]>('categories');
 }
 
 export async function getPromotions(): Promise<DataPromotions[]> {
@@ -99,7 +113,7 @@ export async function getPromotionsOneCompany(
 export async function createPromo(promoData: Omit<DataPromotions, 'id'>) {
   try {
     const response = await fetch(
-      `https://65c21c4ff7e6ea59682aa7e1.mockapi.io/api/v1/promotions`,
+      `https://${PROJECT_TOKEN}.mockapi.io/api/v1/promotions`,
       {
         method: 'POST',
         headers: {
@@ -113,14 +127,14 @@ export async function createPromo(promoData: Omit<DataPromotions, 'id'>) {
       throw new Error('Error creating promo');
     }
   } catch (error) {
-    console.error('Error creting promo:', error);
+    console.error('Error creating promo:', error);
   }
 }
 
 export async function changeCompany(companyData: Company) {
   try {
     const response = await fetch(
-      `https://65c21c4ff7e6ea59682aa7e1.mockapi.io/api/v1/companies/${companyData.id}`,
+      `https://${PROJECT_TOKEN}.mockapi.io/api/v1/companies/${companyData.id}`,
       {
         method: 'PUT',
         headers: {
@@ -141,7 +155,7 @@ export async function changeCompany(companyData: Company) {
 export async function deletePromo(id: string) {
   try {
     const response = await fetch(
-      `https://65c21c4ff7e6ea59682aa7e1.mockapi.io/api/v1/promotions/${id}`,
+      `https://${PROJECT_TOKEN}.mockapi.io/api/v1/promotions/${id}`,
       {
         method: 'DELETE',
         headers: {

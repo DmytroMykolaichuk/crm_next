@@ -1,4 +1,5 @@
 'use client';
+import { useSearchParams } from 'next/navigation';
 import {
   deletePromo,
   getOneCompany,
@@ -32,7 +33,8 @@ export default function CompanyPage({ params }: CompanyProps): React.ReactNode {
     id: '',
   });
   const [promotions, setPromotions] = useState<DataPromotions[]>([]);
-
+  const searchParams = useSearchParams();
+  const reload = searchParams.get('reload');
   useEffect(() => {
     const loadData = async () => {
       const companyData = await getOneCompany(params.id);
@@ -42,7 +44,7 @@ export default function CompanyPage({ params }: CompanyProps): React.ReactNode {
     };
 
     loadData();
-  }, [params.id]);
+  }, [params.id, reload]);
 
   async function handleDelete(id: string) {
     await deletePromo(id);
