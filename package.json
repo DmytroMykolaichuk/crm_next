@@ -2,6 +2,7 @@
   "name": "crm_next",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://DmytroMykolaichuk.github.io/crm_next/",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
