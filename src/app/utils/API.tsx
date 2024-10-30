@@ -57,7 +57,7 @@ const PROJECT_TOKEN = process.env.NEXT_PUBLIC_TOKEN;
 async function fetchData<T>(url: string): Promise<T> {
   try {
     const res = await fetch(
-      `https://${PROJECT_TOKEN}.mockapi.io/api/v1/${url}`,
+      `https://65c21c4ff7e6ea59682aa7e1.mockapi.io/api/v1/${url}`,
     );
     if (!res.ok) {
       if (res.status === 404) {
@@ -115,7 +115,7 @@ export async function createCompany(
 ): Promise<DataCompany> {
   try {
     const response = await fetch(
-      `https://${PROJECT_TOKEN}.mockapi.io/api/v1/companies`,
+      `https://65c21c4ff7e6ea59682aa7e1.mockapi.io/api/v1/companies`,
       {
         method: 'POST',
         headers: {
@@ -139,7 +139,7 @@ export async function createCompany(
 export async function createPromo(promoData: Omit<DataPromotions, 'id'>) {
   try {
     const response = await fetch(
-      `https://${PROJECT_TOKEN}.mockapi.io/api/v1/promotions`,
+      `https://65c21c4ff7e6ea59682aa7e1.mockapi.io/api/v1/promotions`,
       {
         method: 'POST',
         headers: {
@@ -160,7 +160,7 @@ export async function createPromo(promoData: Omit<DataPromotions, 'id'>) {
 export async function changeCompany(companyData: DataCompany) {
   try {
     const response = await fetch(
-      `https://${PROJECT_TOKEN}.mockapi.io/api/v1/companies/${companyData.id}`,
+      `https://65c21c4ff7e6ea59682aa7e1.mockapi.io/api/v1/companies/${companyData.id}`,
       {
         method: 'PUT',
         headers: {
@@ -181,7 +181,7 @@ export async function changeCompany(companyData: DataCompany) {
 export async function deletePromo(id: string) {
   try {
     const response = await fetch(
-      `https://${PROJECT_TOKEN}.mockapi.io/api/v1/promotions/${id}`,
+      `https://65c21c4ff7e6ea59682aa7e1.mockapi.io/api/v1/promotions/${id}`,
       {
         method: 'DELETE',
         headers: {
