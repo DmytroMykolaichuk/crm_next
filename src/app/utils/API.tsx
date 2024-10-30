@@ -1,5 +1,3 @@
-import { useRouter } from 'next/navigation';
-
 interface DataCategories {
   categoryTitle: string;
   categoryid: string;
