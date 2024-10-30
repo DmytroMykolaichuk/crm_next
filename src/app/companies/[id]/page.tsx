@@ -10,7 +10,7 @@ import Header from '../../components/header';
 import React, { useState, useEffect } from 'react';
 import ToolBar from '@/app/components/tool-bar';
 import StatusLabel from '@/app/components/status-label';
-import { Company, DataPromotions } from '@/app/utils/API';
+import { DataCompany, DataPromotions } from '@/app/utils/API';
 
 interface CompanyProps {
   params: {
@@ -20,7 +20,7 @@ interface CompanyProps {
 
 export default function CompanyPage({ params }: CompanyProps): React.ReactNode {
   const [searchTerm, setSearchTerm] = useState('');
-  const [data, setData] = useState<Company>({
+  const [data, setData] = useState<DataCompany>({
     title: 'Loading',
     description: 'Loading',
     status: 'Loading',
@@ -38,7 +38,7 @@ export default function CompanyPage({ params }: CompanyProps): React.ReactNode {
   useEffect(() => {
     const loadData = async () => {
       const companyData = await getOneCompany(params.id);
-      const promoData = await getPromotionsOneCompany(companyData.id);
+      const promoData = await getPromotionsOneCompany(companyData.id as string);
       setData(companyData);
       setPromotions(promoData);
     };
