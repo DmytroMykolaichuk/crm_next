@@ -1,8 +1,8 @@
 'use client';
 import { useState } from 'react';
-import Header from '../components/header';
-import ToolBar from '../components/tool-bar';
-import TableCompanies from '../components/table-companies';
+import Header from '../components/Header';
+import ToolBar from '../components/Tool-bar';
+import TableCompanies from '../components/Table-companies';
 
 export default function Companies(): React.ReactElement {
   const [searchTerm, setSearchTerm] = useState('');

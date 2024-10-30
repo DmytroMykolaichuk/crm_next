@@ -1,5 +1,5 @@
-import FormNewPromo from '@/app/components/form-new-promo';
-import Modal from '@/app/components/modal';
+import FormNewPromo from '@/app/components/Form-new-promo';
+import Modal from '@/app/components/Modal';
 import React from 'react';
 import { getOneCompany } from '@/app/utils/API';
 

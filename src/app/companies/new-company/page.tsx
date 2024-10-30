@@ -1,4 +1,4 @@
-import FormNewCompany from '@/app/components/forma-new-company';
+import FormNewCompany from '@/app/components/Forma-new-company';
 import React from 'react';
 
 export default function NewCompany(): React.ReactNode {

@@ -1,4 +1,4 @@
-import FormNewPromo from '@/app/components/form-new-promo';
+import FormNewPromo from '@/app/components/Form-new-promo';
 import { getOneCompany } from '@/app/utils/API';
 import React from 'react';
 
