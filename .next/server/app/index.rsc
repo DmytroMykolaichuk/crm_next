@@ -1,8 +1,0 @@
-3:I[5878,["878","static/chunks/878-6d6700d1b2b2722b.js","648","static/chunks/648-aa346710a0b02260.js","185","static/chunks/app/layout-3a5698ddb0a1f0e5.js"],"Image"]
-4:I[3849,["878","static/chunks/878-6d6700d1b2b2722b.js","648","static/chunks/648-aa346710a0b02260.js","185","static/chunks/app/layout-3a5698ddb0a1f0e5.js"],"default"]
-5:I[4707,[],""]
-6:I[6423,[],""]
-0:["hbye8TGzNGyQyIh9UqgGr",[[["",{"children":["__PAGE__",{}]},"$undefined","$undefined",true],["",{"children":["__PAGE__",{},[["$L1","$L2",null],null],null]},[[[["$","link","0",{"rel":"stylesheet","href":"/_next/static/css/b8974bb5180276ca.css","precedence":"next","crossOrigin":"$undefined"}]],["$","html",null,{"lang":"en","children":["$","body",null,{"className":"__className_6b8127","style":{"display":"flex"},"children":[["$","div",null,{"className":"fixed h-screen pt-[32px] bg-gray-900 w-1/6 flex flex-col items-center","children":[["$","$L3",null,{"src":"/images/logo.png","alt":"logo","width":122,"height":22,"className":" mb-[77px]"}],["$","$L4",null,{}]]}],["$","div",null,{"className":"w-full ml-[16.666%]","children":["$","$L5",null,{"parallelRouterKey":"children","segmentPath":["children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L6",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":["$","main",null,{"className":"flex flex-1  items-center justify-center","children":["$","h1",null,{"className":"text-red-700 text-9xl","children":"404"}]}],"notFoundStyles":[]}]}]]}]}]],null],null],["$L7",null]]]]
-2:E{"digest":"NEXT_REDIRECT;replace;/dashboard;307;"}
-7:[["$","meta","0",{"name":"viewport","content":"width=device-width, initial-scale=1"}],["$","meta","1",{"charSet":"utf-8"}]]
-1:null
