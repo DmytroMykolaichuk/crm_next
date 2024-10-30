@@ -1,9 +1,10 @@
 'use client';
 import React, { FormEvent } from 'react';
 import LogoUploader from './logo-uploader';
+import { createCompany } from '../utils/API';
 import { useRouter } from 'next/navigation';
 
-const countries = ['', 'Canada', 'USA', 'Italy', 'Ukraine', 'Spain'];
+const countries = ['Canada', 'USA', 'Italy', 'Ukraine', 'Spain'];
 
 export default function FormNewCompany(): React.ReactNode {
   const router = useRouter();
@@ -33,28 +34,8 @@ export default function FormNewCompany(): React.ReactNode {
       avatar: avatar.value,
       hasPromotions: false,
     };
-
-    try {
-      const response = await fetch(
-        'https://65c21c4ff7e6ea59682aa7e1.mockapi.io/api/v1/companies',
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(companyData),
-        },
-      );
-
-      if (!response.ok) {
-        throw new Error('Error creating company');
-      }
-
-      const result = await response.json();
-      router.push(`/companies/${result.id}`);
-    } catch (error) {
-      console.error('Error submitting form:', error);
-    }
+    const result = await createCompany(companyData);
+    router.replace(`/companies/${result.id}`);
   }
 
   return (
@@ -125,7 +106,7 @@ export default function FormNewCompany(): React.ReactNode {
           >
             <option value="1">Canada</option>
             <option value="2">USA</option>
-            <option value="3">Italia</option>
+            <option value="3">Italy</option>
             <option value="4">Ukraine</option>
             <option value="5">Spain</option>
           </select>

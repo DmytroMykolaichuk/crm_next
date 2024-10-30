@@ -1,3 +1,5 @@
+import { useRouter } from 'next/navigation';
+
 interface DataCategories {
   categoryTitle: string;
   categoryid: string;
@@ -38,7 +40,7 @@ interface DataStats {
   id: string;
 }
 
-export interface Company {
+export interface DataCompany {
   title: string;
   description: string;
   status: string;
@@ -48,7 +50,7 @@ export interface Company {
   categoryTitle: string;
   countryId: string;
   countryTitle: string;
-  id: string;
+  id?: string;
   avatar?: string;
 }
 
@@ -96,12 +98,12 @@ export async function getStats(): Promise<DataStats> {
   return fetchData<DataStats>('summary-stats/1');
 }
 
-export async function getCompanies(): Promise<Company[]> {
-  return fetchData<Company[]>('companies');
+export async function getCompanies(): Promise<DataCompany[]> {
+  return fetchData<DataCompany[]>('companies');
 }
 
-export async function getOneCompany(id: string): Promise<Company> {
-  return fetchData<Company>(`companies/${id}`);
+export async function getOneCompany(id: string): Promise<DataCompany> {
+  return fetchData<DataCompany>(`companies/${id}`);
 }
 
 export async function getPromotionsOneCompany(
@@ -110,6 +112,32 @@ export async function getPromotionsOneCompany(
   return fetchData<DataPromotions[]>(`promotions?companyId=${id}`);
 }
 
+export async function createCompany(
+  companyData: Omit<DataCompany, 'id'>,
+): Promise<DataCompany> {
+  try {
+    const response = await fetch(
+      `https://${PROJECT_TOKEN}.mockapi.io/api/v1/companies`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(companyData),
+      },
+    );
+
+    if (!response.ok) {
+      throw new Error('Error submitting form.');
+    }
+
+    const result = await response.json();
+    return result;
+  } catch (error) {
+    console.error('Error submitting form.', error);
+    throw error;
+  }
+}
 export async function createPromo(promoData: Omit<DataPromotions, 'id'>) {
   try {
     const response = await fetch(
@@ -131,7 +159,7 @@ export async function createPromo(promoData: Omit<DataPromotions, 'id'>) {
   }
 }
 
-export async function changeCompany(companyData: Company) {
+export async function changeCompany(companyData: DataCompany) {
   try {
     const response = await fetch(
       `https://${PROJECT_TOKEN}.mockapi.io/api/v1/companies/${companyData.id}`,
