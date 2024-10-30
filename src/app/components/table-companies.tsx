@@ -4,7 +4,7 @@ import { getCompanies } from '../utils/API';
 import StatusLabel from './status-label';
 import HasPromotions from './has-promotions';
 import LinkRow from './link-row';
-import { Company } from '../utils/API';
+import { DataCompany } from '../utils/API';
 
 interface TableCompaniesProps {
   searchTerm: string;
@@ -13,7 +13,7 @@ interface TableCompaniesProps {
 export default function TableCompanies({
   searchTerm,
 }: TableCompaniesProps): React.ReactElement {
-  const [data, setData] = useState<Company[]>([]);
+  const [data, setData] = useState<DataCompany[]>([]);
 
   useEffect(() => {
     const fetchCompanies = async () => {
@@ -66,7 +66,7 @@ export default function TableCompanies({
               categoryTitle,
               countryTitle,
             }) => (
-              <LinkRow id={id} key={id}>
+              <LinkRow id={id as string} key={id as string}>
                 <td
                   className="text-start text-xs py-3 rounded-l-lg border-l-8 pl-3"
                   style={{
